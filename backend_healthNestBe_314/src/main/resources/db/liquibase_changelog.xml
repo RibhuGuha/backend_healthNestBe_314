@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <property name="schemaName" value="healthnestbe_986"></property>
+    <property name="author=" value="db-designer"></property>
+    <changeSet id="v1-01-01" author="${author}">
+    
+ <createTable schemaName="${schemaName}" tableName="Prescription">
+	<column name="PrescriptionId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="ChiefComplaints" type="VARCHAR(250)" />
+    
+     <column name="Diagnosis" type="VARCHAR(250)" />
+    
+     <column name="Advice" type="VARCHAR(250)" />
+    
+     <column name="Investigations" type="VARCHAR(250)" />
+    
+     <column name="NextSteps" type="VARCHAR(250)" />
+    
+     <column name="PersonalNotes" type="VARCHAR(250)" />
+    
+  	<column name="Vitals_BodyTemperature" type="VARCHAR(250)"/>
+	<column name="Vitals_BloodPressure" type="VARCHAR(250)"/>
+	<column name="Vitals_OxygenSaturation" type="VARCHAR(250)"/>
+	<column name="Vitals_Height" type="VARCHAR(250)"/>
+	<column name="Vitals_BloodGlucose" type="VARCHAR(250)"/>
+	<column name="Vitals_HeartRate" type="VARCHAR(250)"/>
+	<column name="Vitals_RespiratoryRate" type="VARCHAR(250)"/>
+	<column name="Vitals_Weight" type="VARCHAR(250)"/>
+	<column name="Vitals_BodyMassIndex" type="VARCHAR(250)"/>
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Availability">
+	<column name="AvailabiltyId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+ 	<column name="Type" type="INTEGER" />
+   
+ 	<column name="DayOfWeek" type="INTEGER" />
+   
+     <column name="SpecificDate" type="DATE" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Appointment">
+	<column name="AppointmentId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="Date" type="DATE" />
+    
+     <column name="Notes" type="VARCHAR(250)" />
+    
+     <column name="StartTime" type="TIME" />
+    
+ 	<column name="Status" type="INTEGER" />
+   
+     <column name="Complaints" type="VARCHAR(250)" />
+    
+     <column name="EndTime" type="TIME" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Reminder">
+	<column name="ReminderId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="Message" type="VARCHAR(250)" />
+    
+     <column name="RemindAt" type="TIMESTAMP" />
+    
+     <column name="SentAt" type="TIMESTAMP" />
+    
+     <column name="IsSent" type="BOOLEAN" />
+    
+ 	<column name="Type" type="INTEGER" />
+   
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="SpecialtyCategory">
+    <column name="Name" type="VARCHAR(250)" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="Description" type="VARCHAR(250)" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="ChatMessage">
+	<column name="ChatMessageId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="Content" type="VARCHAR(250)" />
+    
+     <column name="SentAt" type="TIMESTAMP" />
+    
+     <column name="IsRead" type="BOOLEAN" />
+    
+     <column name="SenderId" type="VARCHAR(250)" />
+    
+     <column name="ReceiverId" type="VARCHAR(250)" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Chatroom">
+	<column name="ChatroomId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="CreatedAt" type="TIMESTAMP" />
+    
+     <column name="ExpiresAt" type="TIMESTAMP" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Patient">
+	<column name="PatientId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="EmergencyContact" type="VARCHAR(250)" />
+    
+  	<column name="Address_Address" type="VARCHAR(250)"/>
+	<column name="Address_City" type="VARCHAR(250)"/>
+	<column name="Address_State" type="VARCHAR(250)"/>
+	<column name="Address_Country" type="VARCHAR(250)"/>
+	<column name="Address_PostalCode" type="BIGINT"/>
+  	<column name="MedicalInformation_KnownMedicalConditions" type="VARCHAR(250)"/>
+	<column name="MedicalInformation_Allergies" type="VARCHAR(250)"/>
+	<column name="MedicalInformation_Medications" type="VARCHAR(250)"/>
+	<column name="MedicalInformation_FamilyMedicalHistory" type="VARCHAR(250)"/>
+     <column name="FullName" type="VARCHAR(250)" />
+    
+     <column name="Age" type="INTEGER" />
+    
+     <column name="DateOfBirth" type="DATE" />
+    
+ 	<column name="Gender" type="INTEGER" />
+   
+     <column name="PhoneNumber" type="VARCHAR(250)" />
+    
+     <column name="Email" type="VARCHAR(250)" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Doctor">
+	<column name="DoctorId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="FullName" type="VARCHAR(250)" />
+    
+     <column name="Email" type="VARCHAR(250)" />
+    
+ 	<column name="Gender" type="INTEGER" />
+   
+     <column name="DateOfBirth" type="DATE" />
+    
+     <column name="PhoneNumber" type="VARCHAR(250)" />
+    
+     <column name="Title" type="VARCHAR(250)" />
+    
+     <column name="Experience" type="VARCHAR(250)" />
+    
+     <column name="ConsultationFee" type="DECIMAL" />
+    
+ 	<column name="Type" type="INTEGER" />
+   
+     <column name="IsApprovedByClinic" type="BOOLEAN" />
+    
+     <column name="ReviewCount" type="INTEGER" />
+    
+     <column name="OverallRating" type="INTEGER" />
+    
+     <column name="IsWeekly" type="BOOLEAN" />
+    
+     <column name="DateOfJoining" type="DATE" />
+    
+  	<column name="Address_Address" type="VARCHAR(250)"/>
+	<column name="Address_City" type="VARCHAR(250)"/>
+	<column name="Address_State" type="VARCHAR(250)"/>
+	<column name="Address_Country" type="VARCHAR(250)"/>
+	<column name="Address_PostalCode" type="BIGINT"/>
+     <column name="About" type="VARCHAR(250)" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Review">
+	<column name="ReviewId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="Rating" type="INTEGER" />
+    
+     <column name="Feedback" type="VARCHAR(250)" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Document">
+	<column name="DocId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="FileName" type="VARCHAR(250)" />
+    
+     <column name="FileType" type="VARCHAR(250)" />
+    
+     <column name="Date" type="DATE" />
+    
+ 	<column name="Content" type="BINARY"/>
+	<column name="DocFileType" type="VARCHAR(100)"/>
+	<column name="StdDocExt" type="VARCHAR(250)" />
+	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Notification">
+	<column name="NotificationId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="Message" type="VARCHAR(250)" />
+    
+     <column name="CreatedAt" type="TIMESTAMP" />
+    
+     <column name="IsRead" type="BOOLEAN" />
+    
+ 	<column name="Type" type="INTEGER" />
+   
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Specialty">
+	<column name="DocSpeId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="Name" type="VARCHAR(250)" />
+    
+     <column name="Description" type="VARCHAR(250)" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Clinic">
+	<column name="ClinicId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="ClinicName" type="VARCHAR(250)" />
+    
+  	<column name="Address_Address" type="VARCHAR(250)"/>
+	<column name="Address_City" type="VARCHAR(250)"/>
+	<column name="Address_State" type="VARCHAR(250)"/>
+	<column name="Address_Country" type="VARCHAR(250)"/>
+	<column name="Address_PostalCode" type="BIGINT"/>
+     <column name="MapUrl" type="VARCHAR(250)" />
+    
+     <column name="LogoName" type="VARCHAR(250)" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Weekday">
+	<column name="WeekdayId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+ 	<column name="DayName" type="INTEGER" />
+   
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Qualification">
+	<column name="QualificationId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="Degree" type="VARCHAR(250)" />
+    
+     <column name="University" type="VARCHAR(250)" />
+    
+     <column name="YearOfCompletion" type="INTEGER" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Payment">
+	<column name="PaymentId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="TransactionId" type="BIGINT" />
+    
+ 	<column name="Method" type="INTEGER" />
+   
+     <column name="Date" type="DATE" />
+    
+     <column name="Time" type="TIME" />
+    
+     <column name="Amount" type="DECIMAL" />
+    
+ 	<column name="Status" type="INTEGER" />
+   
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Medication">
+	<column name="MedicationId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="MedicationName" type="VARCHAR(250)" />
+    
+     <column name="Dosage" type="VARCHAR(250)" />
+    
+     <column name="Frequency" type="VARCHAR(250)" />
+    
+     <column name="Duration" type="VARCHAR(250)" />
+    
+     <column name="Notes" type="VARCHAR(250)" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Slot">
+	<column name="SlotId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="Date" type="DATE" />
+    
+     <column name="StartTime" type="TIME" />
+    
+     <column name="EndTime" type="TIME" />
+    
+ 	
+</createTable>
+	
+  <createTable schemaName="${schemaName}" tableName="DoctorPatientAppointments">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="DoctorId" type="BIGINT" />
+	<column name="AppointmentId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="DoctorAvailabilities">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="DoctorId" type="BIGINT" />
+	<column name="SlotId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="DoctorCertifications">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="DoctorId" type="BIGINT" />
+	<column name="DocId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="AppointmentDocuments">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="AppointmentId" type="BIGINT" />
+	<column name="DocId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="DoctorDoctorChatrooms">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="DoctorId" type="BIGINT" />
+	<column name="ChatroomId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="DoctorWeeklyScheduleByDays">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="DoctorId" type="BIGINT" />
+	<column name="WeekdayId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="DoctorPayments">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="DoctorId" type="BIGINT" />
+	<column name="PaymentId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="DoctorQualifications">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="DoctorId" type="BIGINT" />
+	<column name="QualificationId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="AppointmentReminders">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="AppointmentId" type="BIGINT" />
+	<column name="ReminderId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="PrescriptionMeds">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="PrescriptionId" type="BIGINT" />
+	<column name="MedicationId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="ClinicDoctors">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="ClinicId" type="BIGINT" />
+	<column name="DoctorId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="PatientAppointments">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="PatientId" type="BIGINT" />
+	<column name="AppointmentId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="SpecialtyAvailableDocs">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="DocSpeId" type="BIGINT" />
+	<column name="DoctorId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="AvailabilitySlots">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="AvailabiltyId" type="BIGINT" />
+	<column name="SlotId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="ChatroomChats">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="ChatroomId" type="BIGINT" />
+	<column name="ChatMessageId" type="BIGINT" />
+</createTable>
+  <createTable schemaName="${schemaName}" tableName="PatientChatrooms">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="PatientId" type="BIGINT" />
+	<column name="ChatroomId" type="BIGINT" />
+</createTable>
+
+ 
+	<addForeignKeyConstraint baseTableName="DoctorPatientAppointments" baseTableSchemaName="${schemaName}"  baseColumnNames="DoctorId" constraintName="Appointment_DoctorId_fk"
+	                                  referencedTableName="Doctor" referencedTableSchemaName="${schemaName}" referencedColumnNames="DoctorId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="DoctorPatientAppointments" baseTableSchemaName="${schemaName}"  baseColumnNames="AppointmentId" constraintName="Appointment_AppointmentId_fk"
+	                                  referencedTableName="Appointment" referencedTableSchemaName="${schemaName}" referencedColumnNames="AppointmentId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="DoctorAvailabilities" baseTableSchemaName="${schemaName}"  baseColumnNames="DoctorId" constraintName="Slot_DoctorId_fk"
+	                                  referencedTableName="Doctor" referencedTableSchemaName="${schemaName}" referencedColumnNames="DoctorId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="DoctorAvailabilities" baseTableSchemaName="${schemaName}"  baseColumnNames="SlotId" constraintName="Slot_SlotId_fk"
+	                                  referencedTableName="Slot" referencedTableSchemaName="${schemaName}" referencedColumnNames="SlotId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="DoctorCertifications" baseTableSchemaName="${schemaName}"  baseColumnNames="DoctorId" constraintName="Document_DoctorId_fk"
+	                                  referencedTableName="Doctor" referencedTableSchemaName="${schemaName}" referencedColumnNames="DoctorId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="DoctorCertifications" baseTableSchemaName="${schemaName}"  baseColumnNames="DocId" constraintName="Document_DocId_fk"
+	                                  referencedTableName="Document" referencedTableSchemaName="${schemaName}" referencedColumnNames="DocId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="AppointmentDocuments" baseTableSchemaName="${schemaName}"  baseColumnNames="AppointmentId" constraintName="Document_AppointmentId_fk"
+	                                  referencedTableName="Appointment" referencedTableSchemaName="${schemaName}" referencedColumnNames="AppointmentId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="AppointmentDocuments" baseTableSchemaName="${schemaName}"  baseColumnNames="DocId" constraintName="Document_DocId_fk"
+	                                  referencedTableName="Document" referencedTableSchemaName="${schemaName}" referencedColumnNames="DocId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="DoctorDoctorChatrooms" baseTableSchemaName="${schemaName}"  baseColumnNames="DoctorId" constraintName="Chatroom_DoctorId_fk"
+	                                  referencedTableName="Doctor" referencedTableSchemaName="${schemaName}" referencedColumnNames="DoctorId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="DoctorDoctorChatrooms" baseTableSchemaName="${schemaName}"  baseColumnNames="ChatroomId" constraintName="Chatroom_ChatroomId_fk"
+	                                  referencedTableName="Chatroom" referencedTableSchemaName="${schemaName}" referencedColumnNames="ChatroomId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="DoctorWeeklyScheduleByDays" baseTableSchemaName="${schemaName}"  baseColumnNames="DoctorId" constraintName="Weekday_DoctorId_fk"
+	                                  referencedTableName="Doctor" referencedTableSchemaName="${schemaName}" referencedColumnNames="DoctorId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="DoctorWeeklyScheduleByDays" baseTableSchemaName="${schemaName}"  baseColumnNames="WeekdayId" constraintName="Weekday_WeekdayId_fk"
+	                                  referencedTableName="Weekday" referencedTableSchemaName="${schemaName}" referencedColumnNames="WeekdayId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="DoctorPayments" baseTableSchemaName="${schemaName}"  baseColumnNames="DoctorId" constraintName="Payment_DoctorId_fk"
+	                                  referencedTableName="Doctor" referencedTableSchemaName="${schemaName}" referencedColumnNames="DoctorId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="DoctorPayments" baseTableSchemaName="${schemaName}"  baseColumnNames="PaymentId" constraintName="Payment_PaymentId_fk"
+	                                  referencedTableName="Payment" referencedTableSchemaName="${schemaName}" referencedColumnNames="PaymentId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="DoctorQualifications" baseTableSchemaName="${schemaName}"  baseColumnNames="DoctorId" constraintName="Qualification_DoctorId_fk"
+	                                  referencedTableName="Doctor" referencedTableSchemaName="${schemaName}" referencedColumnNames="DoctorId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="DoctorQualifications" baseTableSchemaName="${schemaName}"  baseColumnNames="QualificationId" constraintName="Qualification_QualificationId_fk"
+	                                  referencedTableName="Qualification" referencedTableSchemaName="${schemaName}" referencedColumnNames="QualificationId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="AppointmentReminders" baseTableSchemaName="${schemaName}"  baseColumnNames="AppointmentId" constraintName="Reminder_AppointmentId_fk"
+	                                  referencedTableName="Appointment" referencedTableSchemaName="${schemaName}" referencedColumnNames="AppointmentId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="AppointmentReminders" baseTableSchemaName="${schemaName}"  baseColumnNames="ReminderId" constraintName="Reminder_ReminderId_fk"
+	                                  referencedTableName="Reminder" referencedTableSchemaName="${schemaName}" referencedColumnNames="ReminderId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="PrescriptionMeds" baseTableSchemaName="${schemaName}"  baseColumnNames="PrescriptionId" constraintName="Medication_PrescriptionId_fk"
+	                                  referencedTableName="Prescription" referencedTableSchemaName="${schemaName}" referencedColumnNames="PrescriptionId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="PrescriptionMeds" baseTableSchemaName="${schemaName}"  baseColumnNames="MedicationId" constraintName="Medication_MedicationId_fk"
+	                                  referencedTableName="Medication" referencedTableSchemaName="${schemaName}" referencedColumnNames="MedicationId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="ClinicDoctors" baseTableSchemaName="${schemaName}"  baseColumnNames="ClinicId" constraintName="Doctor_ClinicId_fk"
+	                                  referencedTableName="Clinic" referencedTableSchemaName="${schemaName}" referencedColumnNames="ClinicId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="ClinicDoctors" baseTableSchemaName="${schemaName}"  baseColumnNames="DoctorId" constraintName="Doctor_DoctorId_fk"
+	                                  referencedTableName="Doctor" referencedTableSchemaName="${schemaName}" referencedColumnNames="DoctorId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="PatientAppointments" baseTableSchemaName="${schemaName}"  baseColumnNames="PatientId" constraintName="Appointment_PatientId_fk"
+	                                  referencedTableName="Patient" referencedTableSchemaName="${schemaName}" referencedColumnNames="PatientId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="PatientAppointments" baseTableSchemaName="${schemaName}"  baseColumnNames="AppointmentId" constraintName="Appointment_AppointmentId_fk"
+	                                  referencedTableName="Appointment" referencedTableSchemaName="${schemaName}" referencedColumnNames="AppointmentId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="SpecialtyAvailableDocs" baseTableSchemaName="${schemaName}"  baseColumnNames="DocSpeId" constraintName="Doctor_DocSpeId_fk"
+	                                  referencedTableName="Specialty" referencedTableSchemaName="${schemaName}" referencedColumnNames="DocSpeId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="SpecialtyAvailableDocs" baseTableSchemaName="${schemaName}"  baseColumnNames="DoctorId" constraintName="Doctor_DoctorId_fk"
+	                                  referencedTableName="Doctor" referencedTableSchemaName="${schemaName}" referencedColumnNames="DoctorId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="AvailabilitySlots" baseTableSchemaName="${schemaName}"  baseColumnNames="AvailabiltyId" constraintName="Slot_AvailabiltyId_fk"
+	                                  referencedTableName="Availability" referencedTableSchemaName="${schemaName}" referencedColumnNames="AvailabiltyId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="AvailabilitySlots" baseTableSchemaName="${schemaName}"  baseColumnNames="SlotId" constraintName="Slot_SlotId_fk"
+	                                  referencedTableName="Slot" referencedTableSchemaName="${schemaName}" referencedColumnNames="SlotId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="ChatroomChats" baseTableSchemaName="${schemaName}"  baseColumnNames="ChatroomId" constraintName="ChatMessage_ChatroomId_fk"
+	                                  referencedTableName="Chatroom" referencedTableSchemaName="${schemaName}" referencedColumnNames="ChatroomId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="ChatroomChats" baseTableSchemaName="${schemaName}"  baseColumnNames="ChatMessageId" constraintName="ChatMessage_ChatMessageId_fk"
+	                                  referencedTableName="ChatMessage" referencedTableSchemaName="${schemaName}" referencedColumnNames="ChatMessageId"/>
+ 
+ 
+	<addForeignKeyConstraint baseTableName="PatientChatrooms" baseTableSchemaName="${schemaName}"  baseColumnNames="PatientId" constraintName="Chatroom_PatientId_fk"
+	                                  referencedTableName="Patient" referencedTableSchemaName="${schemaName}" referencedColumnNames="PatientId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="PatientChatrooms" baseTableSchemaName="${schemaName}"  baseColumnNames="ChatroomId" constraintName="Chatroom_ChatroomId_fk"
+	                                  referencedTableName="Chatroom" referencedTableSchemaName="${schemaName}" referencedColumnNames="ChatroomId"/>
+ 
+	
+  
+	<addColumn tableName="Availability" schemaName="${schemaName}">
+	    <column name="AvailabilityDoctor" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Availability" baseColumnNames="AvailabilityDoctor" baseTableSchemaName="${schemaName}" constraintName="Availability_Doctor_fk" referencedTableName="Doctor"
+	                                 referencedColumnNames="DoctorId" referencedTableSchemaName="${schemaName}"/>
+ 
+ 
+	<addColumn tableName="Appointment" schemaName="${schemaName}">
+	    <column name="AppointmentBookedBy" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Appointment" baseColumnNames="AppointmentBookedBy" baseTableSchemaName="${schemaName}" constraintName="Appointment_BookedBy_fk" referencedTableName="Patient"
+	                                 referencedColumnNames="PatientId" referencedTableSchemaName="${schemaName}"/>
+ 
+
+	<addColumn tableName="Appointment" schemaName="${schemaName}">
+	    <column name="AppointmentConsultedDoctor" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Appointment" baseColumnNames="AppointmentConsultedDoctor" baseTableSchemaName="${schemaName}" constraintName="Appointment_ConsultedDoctor_fk" referencedTableName="Doctor"
+	                                 referencedColumnNames="DoctorId" referencedTableSchemaName="${schemaName}"/>
+ 
+
+	<addColumn tableName="Appointment" schemaName="${schemaName}">
+	    <column name="AppointmentAppointmentReview" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Appointment" baseColumnNames="AppointmentAppointmentReview" baseTableSchemaName="${schemaName}" constraintName="Appointment_AppointmentReview_fk" referencedTableName="Review"
+	                                 referencedColumnNames="ReviewId" referencedTableSchemaName="${schemaName}"/>
+ 
+
+	<addColumn tableName="Appointment" schemaName="${schemaName}">
+	    <column name="AppointmentIssuedPrescription" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Appointment" baseColumnNames="AppointmentIssuedPrescription" baseTableSchemaName="${schemaName}" constraintName="Appointment_IssuedPrescription_fk" referencedTableName="Prescription"
+	                                 referencedColumnNames="PrescriptionId" referencedTableSchemaName="${schemaName}"/>
+ 
+
+	<addColumn tableName="Appointment" schemaName="${schemaName}">
+	    <column name="AppointmentPaymentDetails" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Appointment" baseColumnNames="AppointmentPaymentDetails" baseTableSchemaName="${schemaName}" constraintName="Appointment_PaymentDetails_fk" referencedTableName="Payment"
+	                                 referencedColumnNames="PaymentId" referencedTableSchemaName="${schemaName}"/>
+ 
+
+	<addColumn tableName="Appointment" schemaName="${schemaName}">
+	    <column name="AppointmentAppointmentChatroom" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Appointment" baseColumnNames="AppointmentAppointmentChatroom" baseTableSchemaName="${schemaName}" constraintName="Appointment_AppointmentChatroom_fk" referencedTableName="Chatroom"
+	                                 referencedColumnNames="ChatroomId" referencedTableSchemaName="${schemaName}"/>
+ 
+
+	<addColumn tableName="Appointment" schemaName="${schemaName}">
+	    <column name="AppointmentReferToOtherDoctor" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Appointment" baseColumnNames="AppointmentReferToOtherDoctor" baseTableSchemaName="${schemaName}" constraintName="Appointment_ReferToOtherDoctor_fk" referencedTableName="Doctor"
+	                                 referencedColumnNames="DoctorId" referencedTableSchemaName="${schemaName}"/>
+ 
+
+	<addColumn tableName="Appointment" schemaName="${schemaName}">
+	    <column name="AppointmentAllotedSlot" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Appointment" baseColumnNames="AppointmentAllotedSlot" baseTableSchemaName="${schemaName}" constraintName="Appointment_AllotedSlot_fk" referencedTableName="Slot"
+	                                 referencedColumnNames="SlotId" referencedTableSchemaName="${schemaName}"/>
+ 
+     
+	<addColumn tableName="Patient" schemaName="${schemaName}">
+	    <column name="PatientProfilePicture" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Patient" baseColumnNames="PatientProfilePicture" baseTableSchemaName="${schemaName}" constraintName="Patient_ProfilePicture_fk" referencedTableName="Document"
+	                                 referencedColumnNames="DocId" referencedTableSchemaName="${schemaName}"/>
+ 
+ 
+	<addColumn tableName="Doctor" schemaName="${schemaName}">
+	    <column name="DoctorDoctorImage" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Doctor" baseColumnNames="DoctorDoctorImage" baseTableSchemaName="${schemaName}" constraintName="Doctor_DoctorImage_fk" referencedTableName="Document"
+	                                 referencedColumnNames="DocId" referencedTableSchemaName="${schemaName}"/>
+ 
+
+	<addColumn tableName="Doctor" schemaName="${schemaName}">
+	    <column name="DoctorSpeciality" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Doctor" baseColumnNames="DoctorSpeciality" baseTableSchemaName="${schemaName}" constraintName="Doctor_Speciality_fk" referencedTableName="Specialty"
+	                                 referencedColumnNames="DocSpeId" referencedTableSchemaName="${schemaName}"/>
+ 
+ 
+	<addColumn tableName="Review" schemaName="${schemaName}">
+	    <column name="ReviewReviewedAppointment" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Review" baseColumnNames="ReviewReviewedAppointment" baseTableSchemaName="${schemaName}" constraintName="Review_ReviewedAppointment_fk" referencedTableName="Appointment"
+	                                 referencedColumnNames="AppointmentId" referencedTableSchemaName="${schemaName}"/>
+ 
+   
+	<addColumn tableName="Specialty" schemaName="${schemaName}">
+	    <column name="SpecialtyCategory" type="VARCHAR(250)"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Specialty" baseColumnNames="SpecialtyCategory" baseTableSchemaName="${schemaName}" constraintName="Specialty_Category_fk" referencedTableName="SpecialtyCategory"
+	                                 referencedColumnNames="Name" referencedTableSchemaName="${schemaName}"/>
+ 
+    
+	<addColumn tableName="Payment" schemaName="${schemaName}">
+	    <column name="PaymentPaidBy" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Payment" baseColumnNames="PaymentPaidBy" baseTableSchemaName="${schemaName}" constraintName="Payment_PaidBy_fk" referencedTableName="Patient"
+	                                 referencedColumnNames="PatientId" referencedTableSchemaName="${schemaName}"/>
+ 
+
+	<addColumn tableName="Payment" schemaName="${schemaName}">
+	    <column name="PaymentPaidTo" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Payment" baseColumnNames="PaymentPaidTo" baseTableSchemaName="${schemaName}" constraintName="Payment_PaidTo_fk" referencedTableName="Doctor"
+	                                 referencedColumnNames="DoctorId" referencedTableSchemaName="${schemaName}"/>
+ 
+  
+	<addColumn tableName="Slot" schemaName="${schemaName}">
+	    <column name="SlotBookedAppointment" type="BIGINT"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="Slot" baseColumnNames="SlotBookedAppointment" baseTableSchemaName="${schemaName}" constraintName="Slot_BookedAppointment_fk" referencedTableName="Appointment"
+	                                 referencedColumnNames="AppointmentId" referencedTableSchemaName="${schemaName}"/>
+ 
+	    </changeSet>
+</databaseChangeLog>
