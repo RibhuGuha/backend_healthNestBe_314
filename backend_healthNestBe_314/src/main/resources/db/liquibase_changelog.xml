@@ -14,17 +14,17 @@
 	<column name="PrescriptionId" type="SERIAL" autoIncrement="true" >
         <constraints nullable="false" primaryKey="true"/>
     </column>
-     <column name="ChiefComplaints" type="VARCHAR(250)" />
+     <column name="ChiefComplaints" type="TEXT" />
     
-     <column name="Diagnosis" type="VARCHAR(250)" />
+     <column name="Diagnosis" type="TEXT" />
     
-     <column name="Advice" type="VARCHAR(250)" />
+     <column name="Advice" type="TEXT" />
     
-     <column name="Investigations" type="VARCHAR(250)" />
+     <column name="Investigations" type="TEXT" />
     
-     <column name="NextSteps" type="VARCHAR(250)" />
+     <column name="NextSteps" type="TEXT" />
     
-     <column name="PersonalNotes" type="VARCHAR(250)" />
+     <column name="PersonalNotes" type="TEXT" />
     
   	<column name="Vitals_BodyTemperature" type="VARCHAR(250)"/>
 	<column name="Vitals_BloodPressure" type="VARCHAR(250)"/>
@@ -183,7 +183,7 @@
 	<column name="Address_State" type="VARCHAR(250)"/>
 	<column name="Address_Country" type="VARCHAR(250)"/>
 	<column name="Address_PostalCode" type="BIGINT"/>
-     <column name="About" type="VARCHAR(250)" />
+     <column name="About" type="TEXT" />
     
  	
 </createTable>
@@ -303,7 +303,7 @@
     
      <column name="Duration" type="VARCHAR(250)" />
     
-     <column name="Notes" type="VARCHAR(250)" />
+     <column name="Notes" type="TEXT" />
     
  	
 </createTable>
